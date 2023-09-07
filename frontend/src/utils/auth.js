@@ -1,5 +1,4 @@
-// export const BASE_URL = 'https://auth.nomoreparties.co';
-export const BASE_URL = 'http://localhost:3000';
+const { NODE_ENV, BASE_URL } = process.env;
 
 /**
  * Проверка ответа на запрос к серверу
@@ -20,7 +19,10 @@ const getResponseData = res => {
  * @returns { Promise } - возвращаемый объект переведен в json-формат и содержит готовые данные
  */
 const request = (url, options) => {
-  return fetch(`${BASE_URL}${url}`, options).then(res => getResponseData(res));
+  return fetch(
+    `${'https://api.likee.nomoredomainsic.nomoredomainsicu.ru'}${url}`,
+    options
+  ).then(res => getResponseData(res));
 };
 
 /**
@@ -68,10 +70,10 @@ export const authorize = ({ email, password }) => {
  * Выход пользователя из личного кабинета
  * @returns { Promise.<{string}> } - возвращаемый объект содержит сообщение об очистке cookie
  */
- export const signout = () => {
+export const signout = () => {
   return request('/signout', {
     method: 'POST',
-    credentials: 'include'
+    credentials: 'include',
   });
 };
 

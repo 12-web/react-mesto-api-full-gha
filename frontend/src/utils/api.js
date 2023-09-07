@@ -1,3 +1,5 @@
+const { NODE_ENV, BASE_URL } = process.env;
+
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -13,9 +15,7 @@ class Api {
 
   //отправка запроса и обработка ответа
   _request(url, options) {
-    return fetch(`${this._baseUrl}${url}`, options).then(
-      this._getResponseData
-    );
+    return fetch(`${this._baseUrl}${url}`, options).then(this._getResponseData);
   }
 
   // получение карточек
@@ -86,8 +86,7 @@ class Api {
 }
 
 const api = new Api({
-  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-68',
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.likee.nomoredomainsic.nomoredomainsicu.ru',
   headers: {
     'Content-Type': 'application/json',
   },

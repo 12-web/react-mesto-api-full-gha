@@ -10,17 +10,18 @@ const NotFoundError = require('./components/NotFoundError');
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000, ORIGIN, DB_CONN } = process.env;
 dotenv.config();
+const { PORT = 3000, NODE_ENV, ORIGIN, DB_CONN } = process.env;
 const app = express();
 
 /**
  * безопасность приложения (количество запросов и заголовки)
  */
+console.log(NODE_ENV === 'production' ? ORIGIN : 'http://localhost:3001');
 app.use(
   cors({
     credentials: true,
-    origin: ORIGIN,
+    origin: NODE_ENV === 'production' ? ORIGIN : 'http://localhost:3001',
   })
 );
 
@@ -48,7 +49,7 @@ mongoose.set('toJSON', { useProjection: true });
 /**
  * подключение базы данных
  */
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
+mongoose.connect(DB_CONN, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   autoIndex: true,
