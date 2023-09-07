@@ -1,5 +1,3 @@
-const { NODE_ENV, BASE_URL } = process.env;
-
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;

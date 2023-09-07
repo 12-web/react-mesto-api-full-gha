@@ -1,5 +1,3 @@
-const { NODE_ENV, BASE_URL } = process.env;
-
 /**
  * Проверка ответа на запрос к серверу
  * @param { Promise } res - возвращаемый при fetch-запросе объект
@@ -18,6 +16,13 @@ const getResponseData = res => {
  * @param { string } options - объект конфигурации запроса
  * @returns { Promise } - возвращаемый объект переведен в json-формат и содержит готовые данные
  */
+// const request = (url, options) => {
+//   return fetch(
+//     `${'https://api.likee.nomoredomainsic.nomoredomainsicu.ru'}${url}`,
+//     options
+//   ).then(res => getResponseData(res));
+// };
+
 const request = (url, options) => {
   return fetch(
     `${'https://api.likee.nomoredomainsic.nomoredomainsicu.ru'}${url}`,
