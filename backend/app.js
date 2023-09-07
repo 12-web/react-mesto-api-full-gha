@@ -48,7 +48,7 @@ mongoose.set('toJSON', { useProjection: true });
 /**
  * подключение базы данных
  */
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   autoIndex: true,
