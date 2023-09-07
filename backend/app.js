@@ -21,7 +21,7 @@ app.use(
   cors({
     credentials: true,
     origin: ORIGIN,
-  }),
+  })
 );
 
 const limiter = rateLimit({
@@ -48,7 +48,7 @@ mongoose.set('toJSON', { useProjection: true });
 /**
  * подключение базы данных
  */
-mongoose.connect(DB_CONN, {
+mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   autoIndex: true,
