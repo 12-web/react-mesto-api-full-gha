@@ -2,15 +2,15 @@ const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const auth = require('../middlewares/auth');
 const {
+  getUsers,
   getUser,
   updateProfile,
   updateAvatar,
   getCurrentUser,
-  checkUser
 } = require('../controllers/users');
 const linkRegex = require('../utils/utils');
 
-router.get('/', checkUser);
+router.get('/', auth, getUsers);
 
 router.get('/me', celebrate({
   cookies: Joi.object().keys({
