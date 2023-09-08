@@ -24,7 +24,7 @@ const app = express();
  */
 app.use(
   cors({
-    origin: 'https://likee.nomoredomainsicu.ru',
+    origin: 'http://likee.nomoredomainsicu.ru',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
     credentials: true,
