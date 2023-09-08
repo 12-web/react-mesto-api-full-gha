@@ -17,48 +17,16 @@ module.exports.getUsers = (_, res, next) => {
 };
 
 /**
- * проверка наличия пользователя с возвратом email
+ * получение пользователя по ID
  */
- module.exports.checkUser = (req, res, next) => {
-  const token = req.cookies.jwt;
-
-  if (!token) {
-    return res.send(false);
-  }
-
-  let id;
-  try {
-    id = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'secret-key');
-  } catch (err) {
-    throw new UnauthorizedError('Token указан неверно');
-  }
-
-  User.findById(id)
+module.exports.getUser = (req, res, next) => {
+  User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователя с введенным _id не существует');
       }
 
       res.send({ data: { email: user.email } });
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BadRequestError('Введен некорректный _id пользователя'));
-      } else next(err);
-    });
-};
-
-/**
- * получение пользователя по ID
- */
-module.exports.getUser = (req, res, next) => {
-  User.findById(req.params.userId)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователя с введенным _id не существует');
-      }
-
-      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

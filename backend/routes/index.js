@@ -5,11 +5,11 @@ const {
   login,
   getUser,
   signout,
-  checkUser
 } = require('../controllers/users');
+const auth = require('../middlewares/auth');
 const linkRegex = require('../utils/utils');
 
-router.get('/', checkUser);
+router.get('/', auth, getUser);
 
 router.post('/signout', signout);
 
