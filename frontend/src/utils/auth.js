@@ -24,10 +24,9 @@ const getResponseData = res => {
 // };
 
 const request = (url, options) => {
-  return fetch(
-    `${'https://api.likee.nomoredomainsic.nomoredomainsicu.ru'}${url}`,
-    options
-  ).then(res => getResponseData(res));
+  return fetch(`${'http://localhost:3000'}${url}`, options).then(res =>
+    getResponseData(res)
+  );
 };
 
 /**

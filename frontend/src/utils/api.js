@@ -1,3 +1,6 @@
+const { BASE_URL } = process.env;
+console.log(BASE_URL);
+
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -84,7 +87,8 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://api.likee.nomoredomainsic.nomoredomainsicu.ru',
+  // baseUrl: 'https://api.likee.nomoredomainsic.nomoredomainsicu.ru',
+  baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },

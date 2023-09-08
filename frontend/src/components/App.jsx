@@ -57,18 +57,18 @@ const App = () => {
     }
   }, [loggedIn]);
 
-   /** проверка наличия токена пользователя при входе */
-   useEffect(() => {
-      auth
-        .tockenCheck()
-        .then(res => {
-          if (res) {
-            setUserEmail(res.data.email);
-            setLoggedIn(true);
-            navigate('/', { replace: true });
-          }
-        })
-        .catch(err => console.log(err));
+  /** проверка наличия токена пользователя при входе */
+  useEffect(() => {
+    auth
+      .tockenCheck()
+      .then(res => {
+        if (res) {
+          setUserEmail(res.data.email);
+          setLoggedIn(true);
+          navigate('/', { replace: true });
+        }
+      })
+      .catch(err => console.log(err));
   }, [navigate]);
 
   /**
@@ -205,11 +205,12 @@ const App = () => {
    * выход пользователя из личного кабинета
    */
   const handleSignOut = () => {
-    auth.signout()
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => console.log(err));
+    auth
+      .signout()
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
 
     setUserEmail('');
     setLoggedIn(false);

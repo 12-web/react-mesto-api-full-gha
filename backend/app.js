@@ -17,6 +17,7 @@ const app = express();
 /**
  * безопасность приложения (количество запросов и заголовки)
  */
+console.log(NODE_ENV === 'production' ? ORIGIN : 'http://localhost:3001');
 app.use(
   cors({
     credentials: true,
