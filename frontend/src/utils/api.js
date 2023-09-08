@@ -1,5 +1,4 @@
-const { BASE_URL } = process.env;
-console.log(BASE_URL);
+const { NODE_ENV, REACT_APP_BASE_URL } = process.env;
 
 class Api {
   constructor({ baseUrl, headers }) {
@@ -87,8 +86,8 @@ class Api {
 }
 
 const api = new Api({
-  // baseUrl: 'https://api.likee.nomoredomainsic.nomoredomainsicu.ru',
-  baseUrl: 'http://localhost:3000',
+  baseUrl:
+    NODE_ENV === 'production' ? REACT_APP_BASE_URL : 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },

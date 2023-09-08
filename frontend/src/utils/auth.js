@@ -1,3 +1,4 @@
+const { NODE_ENV, REACT_APP_BASE_URL } = process.env;
 /**
  * Проверка ответа на запрос к серверу
  * @param { Promise } res - возвращаемый при fetch-запросе объект
@@ -24,9 +25,12 @@ const getResponseData = res => {
 // };
 
 const request = (url, options) => {
-  return fetch(`${'http://localhost:3000'}${url}`, options).then(res =>
-    getResponseData(res)
-  );
+  return fetch(
+    `${
+      NODE_ENV === 'production' ? REACT_APP_BASE_URL : 'http://localhost:3000'
+    }${url}`,
+    options
+  ).then(res => getResponseData(res));
 };
 
 /**
