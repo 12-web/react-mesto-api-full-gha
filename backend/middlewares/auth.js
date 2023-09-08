@@ -10,13 +10,6 @@ module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
 
   if (!token) {
-    /**
-     * если запрос пришел с роута '/' без куки, то ответ не возвращает ошибку
-     */
-    if (req.originalUrl === '/') {
-      return res.send(false);
-    }
-
     throw new UnauthorizedError('Необходима авторизация');
   }
 

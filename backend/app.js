@@ -13,7 +13,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 dotenv.config();
 const { PORT = 3000, NODE_ENV, ORIGIN } = process.env;
 const app = express();
-
 /**
  * безопасность приложения (количество запросов и заголовки)
  */

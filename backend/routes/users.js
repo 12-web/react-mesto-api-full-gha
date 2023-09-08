@@ -2,19 +2,15 @@ const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const auth = require('../middlewares/auth');
 const {
-  getUsers,
   getUser,
   updateProfile,
   updateAvatar,
   getCurrentUser,
+  checkUser
 } = require('../controllers/users');
 const linkRegex = require('../utils/utils');
 
-router.get('/', celebrate({
-  cookies: Joi.object().keys({
-    jwt: Joi.string().required(),
-  }),
-}), auth, getUsers);
+router.get('/', checkUser);
 
 router.get('/me', celebrate({
   cookies: Joi.object().keys({
