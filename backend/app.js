@@ -11,7 +11,12 @@ const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 dotenv.config();
-const { PORT = 3000, NODE_ENV, ORIGIN, DB_CONN } = process.env;
+const {
+  PORT = 3000,
+  NODE_ENV,
+  ORIGIN,
+  DB_CONN,
+} = process.env;
 const app = express();
 
 /**
@@ -52,7 +57,7 @@ mongoose.set('toJSON', { useProjection: true });
 /**
  * подключение базы данных
  */
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
+mongoose.connect(DB_CONN, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   autoIndex: true,

@@ -207,14 +207,12 @@ const App = () => {
   const handleSignOut = () => {
     auth
       .signout()
-      .then(res => {
-        console.log(res);
+      .then(() => {
+        setUserEmail('');
+        setLoggedIn(false);
+        navigate('/signin', { replace: true });
       })
       .catch(err => console.log(err));
-
-    setUserEmail('');
-    setLoggedIn(false);
-    navigate('/signin', { replace: true });
   };
 
   /**
