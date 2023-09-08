@@ -17,18 +17,10 @@ const getResponseData = res => {
  * @param { string } options - объект конфигурации запроса
  * @returns { Promise } - возвращаемый объект переведен в json-формат и содержит готовые данные
  */
-// const request = (url, options) => {
-//   return fetch(
-//     `${'https://api.likee.nomoredomainsic.nomoredomainsicu.ru'}${url}`,
-//     options
-//   ).then(res => getResponseData(res));
-// };
 
 const request = (url, options) => {
   return fetch(
-    `${
-      NODE_ENV === 'production' ? REACT_APP_BASE_URL : 'http://localhost:3000'
-    }${url}`,
+    `${'https://api.likee.nomoredomainsic.nomoredomainsicu.ru'}${url}`,
     options
   ).then(res => getResponseData(res));
 };
