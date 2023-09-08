@@ -20,7 +20,7 @@ const getResponseData = res => {
 
 const request = (url, options) => {
   return fetch(
-    `${'https://api.likee.nomoredomainsic.nomoredomainsicu.ru'}${url}`,
+    `${NODE_ENV === 'production' ? REACT_APP_BASE_URL : 'http://localhost:3000'}${url}`,
     options
   ).then(res => getResponseData(res));
 };
