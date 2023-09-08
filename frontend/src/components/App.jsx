@@ -59,16 +59,20 @@ const App = () => {
 
   /** проверка наличия токена пользователя при входе */
   useEffect(() => {
-    auth
+    const isLogged = localStorage.getItem('isLogged');
+    if(isLogged) {
+      auth
       .tockenCheck()
       .then(res => {
         if (res) {
+
           setUserEmail(res.data.email);
           setLoggedIn(true);
           navigate('/', { replace: true });
         }
       })
       .catch(err => console.log(err));
+    }
   }, [navigate]);
 
   /**
@@ -187,6 +191,7 @@ const App = () => {
     auth
       .authorize({ email, password })
       .then(() => {
+        localStorage.setItem('isLogged', true);
         setUserEmail(email);
         setLoggedIn(true);
         navigate('/', { replace: true });
@@ -208,6 +213,7 @@ const App = () => {
     auth
       .signout()
       .then(() => {
+        localStorage.removeItem('isLogged');
         setUserEmail('');
         setLoggedIn(false);
         navigate('/signin', { replace: true });
