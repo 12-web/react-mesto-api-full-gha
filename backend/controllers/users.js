@@ -4,7 +4,7 @@ const User = require('../models/user');
 const NotFoundError = require('../components/NotFoundError');
 const BadRequestError = require('../components/BadRequestError');
 const ConflictError = require('../components/ConflictError');
-// const UnauthorizedError = require('../components/UnauthorizedError');
+const UnauthorizedError = require('../components/UnauthorizedError');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -20,34 +20,34 @@ module.exports.getUsers = (_, res, next) => {
 /**
  * проверка наличия пользователя с возвратом email
  */
-// module.exports.checkUser = (req, res, next) => {
-//   const token = req.cookies.jwt;
+module.exports.checkUser = (req, res, next) => {
+  const token = req.cookies.jwt;
 
-//   if (!token) {
-//     return res.send(false);
-//   }
+  if (!token) {
+    return res.send(false);
+  }
 
-//   let id;
-//   try {
-//     id = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'secret-key');
-//   } catch (err) {
-//     throw new UnauthorizedError('Token указан неверно');
-//   }
+  let id;
+  try {
+    id = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'secret-key');
+  } catch (err) {
+    throw new UnauthorizedError('Token указан неверно');
+  }
 
-//   return User.findById(id)
-//     .then((user) => {
-//       if (!user) {
-//         throw new NotFoundError('Пользователя с введенным _id не существует');
-//       }
+  return User.findById(id)
+    .then((user) => {
+      if (!user) {
+        throw new NotFoundError('Пользователя с введенным _id не существует');
+      }
 
-//       res.send({ data: { email: user.email } });
-//     })
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         next(new BadRequestError('Введен некорректный _id пользователя'));
-//       } else next(err);
-//     });
-// };
+      res.send({ data: { email: user.email } });
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new BadRequestError('Введен некорректный _id пользователя'));
+      } else next(err);
+    });
+};
 
 /**
  * получение пользователя по ID
