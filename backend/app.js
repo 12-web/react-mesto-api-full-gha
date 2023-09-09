@@ -13,10 +13,10 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 dotenv.config();
 const { PORT = 3000, NODE_ENV, ORIGIN } = process.env;
 const app = express();
+
 /**
  * безопасность приложения (количество запросов и заголовки)
  */
-
 app.use(
   cors({
     origin: NODE_ENV === 'production' ? ORIGIN : 'http://localhost:3001',
@@ -58,6 +58,14 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 });
 
 app.use(requestLogger);
+
+/** краш-тест */
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 /**
  * установка роутов
  */
