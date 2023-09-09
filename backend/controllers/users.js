@@ -4,6 +4,7 @@ const User = require('../models/user');
 const NotFoundError = require('../components/NotFoundError');
 const BadRequestError = require('../components/BadRequestError');
 const ConflictError = require('../components/ConflictError');
+const UnauthorizedError = require('../components/UnauthorizedError');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -19,7 +20,7 @@ module.exports.getUsers = (_, res, next) => {
 /**
  * проверка наличия пользователя с возвратом email
  */
- module.exports.checkUser = (req, res, next) => {
+module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
 
   if (!token) {
@@ -33,7 +34,7 @@ module.exports.getUsers = (_, res, next) => {
     throw new UnauthorizedError('Token указан неверно');
   }
 
-  User.findById(id)
+  return User.findById(id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователя с введенным _id не существует');
