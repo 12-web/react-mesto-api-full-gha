@@ -231,11 +231,12 @@ const App = () => {
     setFormIsLoading(true);
     auth
       .register({ email, password })
-      .then(res => {
+      .then(() => {
         /** вывод модального окна об успешной регистрации */
+        setTextTooltip('Вы успешно зарегистрировались!');
         setIsSuccessResult(true);
         setIsInfoTooltipOpen(true);
-        setTextTooltip('Вы успешно зарегистрировались!');
+        navigate('/signin', { replace: true })
       })
       .catch(err => {
         console.log(err);
