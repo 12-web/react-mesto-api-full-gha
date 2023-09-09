@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP 84.252.128.21
+IP-адрес 84.252.128.21
 
 Frontend https://likee.nomoredomainsicu.ru
 
